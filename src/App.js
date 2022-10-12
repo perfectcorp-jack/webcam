@@ -67,7 +67,10 @@ class App extends React.Component {
 
   // release stream
   releaseStream() {
-
+    const video = document.getElementById('video');
+    video.srcObject.getTracks().forEach(function (track) {
+      track.stop();
+    });
   }
 
   // handle zoom in
@@ -121,7 +124,14 @@ class App extends React.Component {
   }
 
   // save image
-  
+  saveImage() {
+    const canvas = document.getElementById('canvas');
+    const dataURL = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = 'image.png';
+    link.href = dataURL;
+    link.click();
+  }
 
   // render
   render() {
@@ -137,7 +147,7 @@ class App extends React.Component {
           <button type="button" style={{ width: '100px' }} onClick={this.handleZoomOut}>zoom out</button>
         </div>
         <div>
-          <button type="button" style={{ width: '100px' }}>save</button>
+          <button type="button" style={{ width: '100px' }} onClick={this.saveImage}>save</button>
         </div>
       </div>
     );
