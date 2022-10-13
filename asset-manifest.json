@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/perfectcorp-jack/webcam/static/css/main.16c9e94d.css",
+    "main.js": "/perfectcorp-jack/webcam/static/js/main.e8f27605.js",
+    "static/js/787.5ee8b7f4.chunk.js": "/perfectcorp-jack/webcam/static/js/787.5ee8b7f4.chunk.js",
+    "index.html": "/perfectcorp-jack/webcam/index.html",
+    "main.16c9e94d.css.map": "/perfectcorp-jack/webcam/static/css/main.16c9e94d.css.map",
+    "main.e8f27605.js.map": "/perfectcorp-jack/webcam/static/js/main.e8f27605.js.map",
+    "787.5ee8b7f4.chunk.js.map": "/perfectcorp-jack/webcam/static/js/787.5ee8b7f4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16c9e94d.css",
+    "static/js/main.e8f27605.js"
+  ]
+}
