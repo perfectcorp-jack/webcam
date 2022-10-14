@@ -16,11 +16,16 @@ class App extends React.Component {
     this.videoTag = React.createRef();
     this.handleZoomIn = this.handleZoomIn.bind(this);
     this.handleZoomOut = this.handleZoomOut.bind(this);
+    this.original = this.original.bind(this);
+    this.grayscale = this.grayscale.bind(this);
+    this.blur = this.blur.bind(this);
+    this.saveImage = this.saveImage.bind(this);
   }
 
   componentDidMount() {
     this.webcam();
     this.timerID = setInterval(() => this.webcamToCanvas(), 0);
+    // requestAnimationFrame(() => this.webcamToCanvas());
   }
 
   componentWillUnmount() {
@@ -95,7 +100,7 @@ class App extends React.Component {
       height: video.videoHeight * ratio,
       scaleWidth: scaleWidth,
       scaleHeight: scaleHeight,
-    })
+    });
   }
 
   // handle zoom out
@@ -122,7 +127,7 @@ class App extends React.Component {
 
   // original
   original() {
-    const canvas = document.getElementById('canvas');
+    const canvas = this.canvasTag.current;
     canvas.classList.add('original');
     canvas.classList.remove('grayscale');
     canvas.classList.remove('blur');
@@ -130,7 +135,7 @@ class App extends React.Component {
 
   // grayscale
   grayscale() {
-    const canvas = document.getElementById('canvas');
+    const canvas = this.canvasTag.current;
     canvas.classList.add('grayscale');
     canvas.classList.remove('blur');
     canvas.classList.remove('original');
@@ -138,7 +143,7 @@ class App extends React.Component {
 
   // blur
   blur() {
-    const canvas = document.getElementById('canvas');
+    const canvas = this.canvasTag.current;
     canvas.classList.add('blur');
     canvas.classList.remove('grayscale');
     canvas.classList.remove('original');
@@ -146,7 +151,7 @@ class App extends React.Component {
 
   // save image
   saveImage() {
-    const canvas = document.getElementById('canvas');
+    const canvas = this.canvasTag.current;
     const dataURL = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.download = 'image.png';
@@ -159,7 +164,7 @@ class App extends React.Component {
     return (
       <div className="App" style={{ textAlign: 'center' }}>
         <canvas ref={this.canvasTag} id='canvas' style={{ display: 'block', width: '800px', height: '100%', margin: 'auto' }} width={1920} height={1080}></canvas>
-        <video ref={this.videoTag} id='video' style={{ display: 'none' }} autoPlay={true}></video>
+        <video ref={this.videoTag} id='video' style={{ display: 'none' }} autoPlay></video>
         {this.state.stop ?
           <button style={{ width: '150px' }} onClick={
             () => {
