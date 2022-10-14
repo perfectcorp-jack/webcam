@@ -87,9 +87,7 @@ class App extends React.Component {
     const canvas = this.canvasTag.current;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    const ratioX = video.videoWidth / video.videoWidth * this.zoom;
-    const ratioY = video.videoHeight / video.videoHeight * this.zoom;
-    const ratio = Math.min(ratioX, ratioY);
+    const ratio = this.zoom;
     const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
     const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
     this.setState({
@@ -108,9 +106,7 @@ class App extends React.Component {
       const canvas = this.canvasTag.current;
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      const ratioX = video.videoWidth / video.videoWidth * this.zoom;
-      const ratioY = video.videoHeight / video.videoHeight * this.zoom;
-      const ratio = Math.min(ratioX, ratioY);
+      const ratio = this.zoom;
       const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
       const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
       this.setState({
