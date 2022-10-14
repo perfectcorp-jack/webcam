@@ -103,21 +103,25 @@ class App extends React.Component {
   // handle zoom out
   handleZoomOut() {
     this.zoom -= 0.1;
-    const video = this.videoTag.current;
-    const canvas = this.canvasTag.current;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    const ratioX = video.videoWidth / video.videoWidth * this.zoom;
-    const ratioY = video.videoHeight / video.videoHeight * this.zoom;
-    const ratio = Math.min(ratioX, ratioY);
-    const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
-    const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
-    this.setState({
-      width: video.videoWidth * ratio,
-      height: video.videoHeight * ratio,
-      scaleWidth: scaleWidth,
-      scaleHeight: scaleHeight,
-    })
+    if (this.zoom >= 0) {
+      const video = this.videoTag.current;
+      const canvas = this.canvasTag.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ratioX = video.videoWidth / video.videoWidth * this.zoom;
+      const ratioY = video.videoHeight / video.videoHeight * this.zoom;
+      const ratio = Math.min(ratioX, ratioY);
+      const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
+      const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
+      this.setState({
+        width: video.videoWidth * ratio,
+        height: video.videoHeight * ratio,
+        scaleWidth: scaleWidth,
+        scaleHeight: scaleHeight,
+      })
+    } else {
+      this.zoom = 0;
+    }
   }
 
   // original
