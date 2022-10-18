@@ -24,12 +24,15 @@ class App extends React.Component {
 
   componentDidMount() {
     this.webcam();
-    this.timerID = setInterval(() => this.webcamToCanvas(), 0);
-    // requestAnimationFrame(() => this.webcamToCanvas());
+    this.callInterval();
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+  }
+
+  callInterval() {
+    this.webcamToCanvas();
+    requestAnimationFrame(() => this.callInterval());
   }
 
   // read webcam
@@ -89,9 +92,6 @@ class App extends React.Component {
   handleZoomIn() {
     this.zoom += 0.1;
     const video = this.videoTag.current;
-    const canvas = this.canvasTag.current;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
     const ratio = this.zoom;
     const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
     const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
@@ -108,9 +108,6 @@ class App extends React.Component {
     this.zoom -= 0.1;
     if (this.zoom >= 0) {
       const video = this.videoTag.current;
-      const canvas = this.canvasTag.current;
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
       const ratio = this.zoom;
       const scaleWidth = (video.videoWidth - video.videoWidth * ratio) / 2;
       const scaleHeight = (video.videoHeight - video.videoHeight * ratio) / 2;
