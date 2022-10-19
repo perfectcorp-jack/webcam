@@ -28,6 +28,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
+    cancelAnimationFrame(this.callInterval);
   }
 
   callInterval() {
