@@ -172,7 +172,7 @@ class App extends React.Component {
                 stop: false
               });
               this.webcam();
-              this.timerID = setInterval(() => this.webcamToCanvas(), 0);
+              this.callInterval();
             }}>
             create stream
           </button>
@@ -183,7 +183,7 @@ class App extends React.Component {
                 stop: true
               });
               this.releaseStream();
-              clearInterval(this.timerID);
+              cancelAnimationFrame(this.requestID);
             }}>
             release stream
           </button>
