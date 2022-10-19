@@ -5,6 +5,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.zoom = 1;
+    this.requestID = 0;
     this.state = {
       stop: false,
       scaleWidth: 0,
@@ -28,12 +29,12 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.callInterval);
+    cancelAnimationFrame(this.requestID);
   }
 
   callInterval() {
     this.webcamToCanvas();
-    requestAnimationFrame(() => this.callInterval());
+    this.requestID = requestAnimationFrame(() => this.callInterval());
   }
 
   // read webcam
@@ -79,6 +80,7 @@ class App extends React.Component {
     video.srcObject.getVideoTracks().forEach((stream) => {
       stream.stop();
     });
+    cancelAnimationFrame(this.requestID);
     this.zoom = 1;
     this.setState({
       stop: true,
